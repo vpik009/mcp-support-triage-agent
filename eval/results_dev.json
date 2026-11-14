@@ -1,0 +1,302 @@
+[
+ {
+  "id": 6,
+  "category": "bestellung_lieferung",
+  "pred_category": "bestellung_lieferung",
+  "needs_human": true,
+  "pred_needs_human": true,
+  "made_ticket": true,
+  "faq_hit": false,
+  "seconds": 49.9
+ },
+ {
+  "id": 7,
+  "category": "bestellung_lieferung",
+  "pred_category": "allgemein",
+  "needs_human": false,
+  "pred_needs_human": false,
+  "made_ticket": false,
+  "faq_hit": true,
+  "seconds": 13.0
+ },
+ {
+  "id": 10,
+  "category": "bestellung_lieferung",
+  "pred_category": "bestellung_lieferung",
+  "needs_human": false,
+  "pred_needs_human": false,
+  "made_ticket": false,
+  "faq_hit": true,
+  "seconds": 19.1
+ },
+ {
+  "id": 11,
+  "category": "bestellung_lieferung",
+  "pred_category": "bestellung_lieferung",
+  "needs_human": true,
+  "pred_needs_human": true,
+  "made_ticket": false,
+  "faq_hit": true,
+  "seconds": 77.0
+ },
+ {
+  "id": 13,
+  "category": "bestellung_lieferung",
+  "pred_category": "bestellung_lieferung",
+  "needs_human": true,
+  "pred_needs_human": true,
+  "made_ticket": true,
+  "faq_hit": true,
+  "seconds": 58.7
+ },
+ {
+  "id": 17,
+  "category": "bestellung_lieferung",
+  "pred_category": "medizinisch",
+  "needs_human": false,
+  "pred_needs_human": true,
+  "made_ticket": false,
+  "faq_hit": true,
+  "seconds": 19.1
+ },
+ {
+  "id": 20,
+  "category": "bestellung_lieferung",
+  "pred_category": "bestellung_lieferung",
+  "needs_human": true,
+  "pred_needs_human": true,
+  "made_ticket": true,
+  "faq_hit": false,
+  "seconds": 31.6
+ },
+ {
+  "id": 26,
+  "category": "bestellung_lieferung",
+  "pred_category": "bestellung_lieferung",
+  "needs_human": false,
+  "pred_needs_human": false,
+  "made_ticket": false,
+  "faq_hit": true,
+  "seconds": 11.5
+ },
+ {
+  "id": 34,
+  "category": "rezept_termin_dokumente",
+  "pred_category": "rezept_termin_dokumente",
+  "needs_human": false,
+  "pred_needs_human": true,
+  "made_ticket": false,
+  "faq_hit": true,
+  "seconds": 41.9
+ },
+ {
+  "id": 37,
+  "category": "rezept_termin_dokumente",
+  "pred_category": "medizinisch",
+  "needs_human": false,
+  "pred_needs_human": true,
+  "made_ticket": false,
+  "faq_hit": true,
+  "seconds": 18.6
+ },
+ {
+  "id": 38,
+  "category": "rezept_termin_dokumente",
+  "pred_category": "medizinisch",
+  "needs_human": false,
+  "pred_needs_human": true,
+  "made_ticket": false,
+  "faq_hit": true,
+  "seconds": 10.2
+ },
+ {
+  "id": 39,
+  "category": "rezept_termin_dokumente",
+  "pred_category": "medizinisch",
+  "needs_human": true,
+  "pred_needs_human": true,
+  "made_ticket": true,
+  "faq_hit": null,
+  "seconds": 58.7
+ },
+ {
+  "id": 42,
+  "category": "rezept_termin_dokumente",
+  "pred_category": "medizinisch",
+  "needs_human": true,
+  "pred_needs_human": true,
+  "made_ticket": true,
+  "faq_hit": null,
+  "seconds": 96.9
+ },
+ {
+  "id": 46,
+  "category": "rezept_termin_dokumente",
+  "pred_category": "medizinisch",
+  "needs_human": true,
+  "pred_needs_human": true,
+  "made_ticket": false,
+  "faq_hit": true,
+  "seconds": 27.0
+ },
+ {
+  "id": 49,
+  "category": "zahlung_rechnung",
+  "pred_category": "bestellung_lieferung",
+  "needs_human": false,
+  "pred_needs_human": false,
+  "made_ticket": false,
+  "faq_hit": true,
+  "seconds": 16.2
+ },
+ {
+  "id": 54,
+  "category": "zahlung_rechnung",
+  "pred_category": "zahlung_rechnung",
+  "needs_human": true,
+  "pred_needs_human": false,
+  "made_ticket": false,
+  "faq_hit": null,
+  "seconds": 12.2
+ },
+ {
+  "id": 56,
+  "category": "zahlung_rechnung",
+  "pred_category": "zahlung_rechnung",
+  "needs_human": false,
+  "pred_needs_human": false,
+  "made_ticket": false,
+  "faq_hit": true,
+  "seconds": 13.4
+ },
+ {
+  "id": 58,
+  "category": "zahlung_rechnung",
+  "pred_category": "zahlung_rechnung",
+  "needs_human": true,
+  "pred_needs_human": true,
+  "made_ticket": true,
+  "faq_hit": null,
+  "seconds": 26.9
+ },
+ {
+  "id": 62,
+  "category": "it_app",
+  "pred_category": "allgemein",
+  "needs_human": false,
+  "pred_needs_human": false,
+  "made_ticket": false,
+  "faq_hit": true,
+  "seconds": 12.2
+ },
+ {
+  "id": 66,
+  "category": "it_app",
+  "pred_category": "it_app",
+  "needs_human": true,
+  "pred_needs_human": false,
+  "made_ticket": true,
+  "faq_hit": null,
+  "seconds": 22.2
+ },
+ {
+  "id": 67,
+  "category": "it_app",
+  "pred_category": "it_app",
+  "needs_human": true,
+  "pred_needs_human": false,
+  "made_ticket": false,
+  "faq_hit": null,
+  "seconds": 14.3
+ },
+ {
+  "id": 74,
+  "category": "datenschutz_recht_beschwerde",
+  "pred_category": "rezept_termin_dokumente",
+  "needs_human": false,
+  "pred_needs_human": true,
+  "made_ticket": false,
+  "faq_hit": true,
+  "seconds": 21.5
+ },
+ {
+  "id": 79,
+  "category": "datenschutz_recht_beschwerde",
+  "pred_category": "allgemein",
+  "needs_human": true,
+  "pred_needs_human": true,
+  "made_ticket": true,
+  "faq_hit": null,
+  "seconds": 60.1
+ },
+ {
+  "id": 80,
+  "category": "datenschutz_recht_beschwerde",
+  "pred_category": "medizinisch",
+  "needs_human": true,
+  "pred_needs_human": true,
+  "made_ticket": true,
+  "faq_hit": null,
+  "seconds": 44.6
+ },
+ {
+  "id": 81,
+  "category": "allgemein",
+  "pred_category": "allgemein",
+  "needs_human": false,
+  "pred_needs_human": true,
+  "made_ticket": true,
+  "faq_hit": false,
+  "seconds": 30.4
+ },
+ {
+  "id": 86,
+  "category": "allgemein",
+  "pred_category": "allgemein",
+  "needs_human": true,
+  "pred_needs_human": true,
+  "made_ticket": true,
+  "faq_hit": null,
+  "seconds": 19.9
+ },
+ {
+  "id": 93,
+  "category": "medizinisch",
+  "pred_category": "medizinisch",
+  "needs_human": true,
+  "pred_needs_human": true,
+  "made_ticket": true,
+  "faq_hit": null,
+  "seconds": 72.9
+ },
+ {
+  "id": 96,
+  "category": "medizinisch",
+  "pred_category": "medizinisch",
+  "needs_human": true,
+  "pred_needs_human": true,
+  "made_ticket": true,
+  "faq_hit": null,
+  "seconds": 86.5
+ },
+ {
+  "id": 97,
+  "category": "medizinisch",
+  "pred_category": "medizinisch",
+  "needs_human": true,
+  "pred_needs_human": true,
+  "made_ticket": true,
+  "faq_hit": null,
+  "seconds": 70.5
+ },
+ {
+  "id": 99,
+  "category": "medizinisch",
+  "pred_category": "medizinisch",
+  "needs_human": true,
+  "pred_needs_human": true,
+  "made_ticket": true,
+  "faq_hit": true,
+  "seconds": 123.0
+ }
+]

@@ -1,0 +1,262 @@
+{
+ "categories": {
+  "rezept_termin_dokumente": "Rezepte, Termine & Dokumente",
+  "bestellung_lieferung": "Bestellungen & Lieferungen",
+  "zahlung_rechnung": "Zahlungen, Rechnungen & Inkasso",
+  "it_app": "IT & App",
+  "datenschutz_recht_beschwerde": "Datenschutz, Recht, Beschwerden & Reklamationen",
+  "allgemein": "Allgemeine Anliegen",
+  "medizinisch": "Medizinische Frage (immer an Ärzt:innen/Mensch, nie automatisch beantworten)"
+ },
+ "note": "Answers are short German paraphrases of Bloomwell's public FAQ pages, not verbatim copies. Source URL per entry.",
+ "faq": [
+  {
+   "id": "faq_01",
+   "category": "allgemein",
+   "question": "Kann ich online ein Cannabis-Rezept bekommen?",
+   "answer": "Ja, das Rezept kann vollständig online ausgestellt werden, von der Registrierung bis zum fertigen Rezept über die Plattform.",
+   "source_url": "https://bloomwell.de/",
+   "retrieved": "2026-11-14"
+  },
+  {
+   "id": "faq_02",
+   "category": "zahlung_rechnung",
+   "question": "Was kostet ein Cannabis-Rezept online bei Bloomwell?",
+   "answer": "Aktuell übernimmt Bloomwell bei der Rezeptanfrage die Rezeptgebühren (zeitlich begrenzte Aktion). Sonst kostet die Rezeptanfrage 25,22 € und ein Folgerezept nach Termin 28,25 €, berechnet nach GOÄ.",
+   "source_url": "https://bloomwell.de/",
+   "retrieved": "2026-11-14"
+  },
+  {
+   "id": "faq_03",
+   "category": "allgemein",
+   "question": "Wie funktioniert der Prozess zur Online-Behandlung?",
+   "answer": "Kostenloses Konto anlegen, Fragebogen ausfüllen und Unterlagen hochladen, dann Online-Gespräch buchen oder Rezeptanfrage stellen. Das digitale Rezept geht an die gewählte Apotheke, nach Zahlung kommt die Lieferung per DHL.",
+   "source_url": "https://bloomwell.de/",
+   "retrieved": "2026-11-14"
+  },
+  {
+   "id": "faq_04",
+   "category": "allgemein",
+   "question": "Welche Voraussetzungen muss ich erfüllen, um ein Cannabis-Rezept zu erhalten?",
+   "answer": "In der Regel bei chronischen oder therapieresistenten Beschwerden. Die Entscheidung trifft der Arzt individuell im Beratungsgespräch.",
+   "source_url": "https://bloomwell.de/",
+   "retrieved": "2026-11-14"
+  },
+  {
+   "id": "faq_05",
+   "category": "rezept_termin_dokumente",
+   "question": "Wie schnell erhalte ich mein Rezept?",
+   "answer": "Nach Gespräch oder Prüfung der Rezeptanfrage wird das Rezept meist innerhalb von 24 Stunden ausgestellt.",
+   "source_url": "https://bloomwell.de/",
+   "retrieved": "2026-11-14"
+  },
+  {
+   "id": "faq_06",
+   "category": "bestellung_lieferung",
+   "question": "Kann ich mein Rezept auch in einer lokalen Apotheke einlösen?",
+   "answer": "Ja. Entweder über eine Partnerapotheke der Plattform mit schneller Lieferung oder in einer beliebigen Apotheke.",
+   "source_url": "https://bloomwell.de/",
+   "retrieved": "2026-11-14"
+  },
+  {
+   "id": "faq_07",
+   "category": "zahlung_rechnung",
+   "question": "Welche Zahlungsoptionen gibt es?",
+   "answer": "Google Pay, Apple Pay, Klarna und Kreditkarte (AMEX, Mastercard, VISA). Alternativ Abholung in der Apotheke mit Bezahlung vor Ort. Auf Wunsch gibt es eine Rechnung für private Versicherung.",
+   "source_url": "https://bloomwell.de/",
+   "retrieved": "2026-11-14"
+  },
+  {
+   "id": "faq_08",
+   "category": "allgemein",
+   "question": "Wie kann ich mich an den Support wenden?",
+   "answer": "Im Patientenportal oder in der App über Mehr → Support, mit Themen wie Rezepte, Bestellungen, Zahlungen, IT & App oder Beschwerden. Ausweisdokumente nur über Mehr → Medizinische Dokumente hochladen.",
+   "source_url": "https://bloomwell.de/faq/support",
+   "retrieved": "2026-11-14"
+  },
+  {
+   "id": "faq_09",
+   "category": "allgemein",
+   "question": "Kontaktdaten von Bloomwell",
+   "answer": "Kontakt über den Chat im Patientenportal oder per E-Mail an info@bloomwell.de.",
+   "source_url": "https://bloomwell.de/faq/kontaktdaten-bloomwell",
+   "retrieved": "2026-11-14"
+  },
+  {
+   "id": "faq_10",
+   "category": "rezept_termin_dokumente",
+   "question": "Wie ist mein Rezeptstatus?",
+   "answer": "Der Status steht in der App: 'Rezept ausgestellt' (Apotheke innerhalb von 24 Stunden bestätigen, sonst automatische Übermittlung), 'Rezept versendet' (Bestellung wird automatisch angelegt) und 'Rezept in Anpassung'.",
+   "source_url": "https://bloomwell.de/faq/wie-ist-mein-rezeptstatus",
+   "retrieved": "2026-11-14"
+  },
+  {
+   "id": "faq_11",
+   "category": "rezept_termin_dokumente",
+   "question": "Wie ist der Bearbeitungsstatus von meinem Rezept?",
+   "answer": "Im Patientenportal unter 'Therapie'. Stufen: in Prüfung, ausgestellt, versendet, in Anpassung. Nach Freigabe geht das Rezept elektronisch an die Partnerapotheke.",
+   "source_url": "https://bloomwell.de/faq/wie-ist-der-bearbeitungsstatus-von-meinem-rezepet",
+   "retrieved": "2026-11-14"
+  },
+  {
+   "id": "faq_12",
+   "category": "rezept_termin_dokumente",
+   "question": "Wie beantrage ich ein Folgerezept?",
+   "answer": "Nach der ersten Sprechstunde, wenn die Medikation nur noch etwa 10 Tage reicht: unter 'Therapie' oder im Livebestand den Service 'Folgerezept' buchen und den Fragebogen ausfüllen. Der Arzt entscheidet über die Freigabe.",
+   "source_url": "https://bloomwell.de/faq/folgerezept-beantragen",
+   "retrieved": "2026-11-14"
+  },
+  {
+   "id": "faq_13",
+   "category": "bestellung_lieferung",
+   "question": "Wie ist der Status meiner Bestellung?",
+   "answer": "Status im Patientenportal, Tracking-Link per E-Mail nach Versand. Bewegt sich die Sendung 6 Tage nicht, an info@bloomwell.de schreiben. Bei 'In Prüfung' nach Zahlung braucht die Zuordnung etwas Zeit.",
+   "source_url": "https://bloomwell.de/faq/bestellungsstatus",
+   "retrieved": "2026-11-14"
+  },
+  {
+   "id": "faq_14",
+   "category": "bestellung_lieferung",
+   "question": "Wie lange dauert die Lieferzeit? Wann kommt mein Paket?",
+   "answer": "Meist 1–2 Werktage Zustellung plus 1–2 Werktage Bearbeitung in der Apotheke. Bei Nachbestellung oder Präparatsanpassung 2–4 Tage mehr. DHL stellt Mo–Fr zu.",
+   "source_url": "https://bloomwell.de/faq/lieferzeit",
+   "retrieved": "2026-11-14"
+  },
+  {
+   "id": "faq_15",
+   "category": "bestellung_lieferung",
+   "question": "Wie erhalte ich eine Sendungsverfolgung (Tracking-Nummer)?",
+   "answer": "Nach Zahlung und Versand kommt eine E-Mail mit Sendungsnummer und Tracking-Link; die Nummer steht auch in der App. Bei DHL Standard Nachforschung erst nach 5 Tagen ohne Bewegung.",
+   "source_url": "https://bloomwell.de/faq/wie-erhalte-ich-eine-sendungsverfolgung-tracking-nummer",
+   "retrieved": "2026-11-14"
+  },
+  {
+   "id": "faq_16",
+   "category": "datenschutz_recht_beschwerde",
+   "question": "Was mache ich, wenn mein Paket beschädigt oder geöffnet ist?",
+   "answer": "Stark beschädigte oder geöffnete Pakete nicht annehmen und den Vorfall per Chat oder an info@bloomwell.de melden. Das Paket geht zur Prüfung an die Apotheke zurück.",
+   "source_url": "https://bloomwell.de/faq/paket-beschädigt-oder-geöffnet",
+   "retrieved": "2026-11-14"
+  },
+  {
+   "id": "faq_17",
+   "category": "bestellung_lieferung",
+   "question": "Was ist, wenn mein Zustellversuch nicht erfolgreich war?",
+   "answer": "Das Paket geht an den Absender zurück, die Apotheke darf stornieren und Kosten berechnen. Mit korrekter Adresse an den Support wenden, dann wird neu versendet.",
+   "source_url": "https://bloomwell.de/faq/paketzustellung",
+   "retrieved": "2026-11-14"
+  },
+  {
+   "id": "faq_18",
+   "category": "bestellung_lieferung",
+   "question": "Kann ich die Lieferanschrift nach einer Bestellung ändern?",
+   "answer": "Nur vor der Zahlung im Bezahlvorgang unter 'Lieferung'. Dauerhaft unter Mein Profil → Persönliche Details → Versandadresse. Nach Zahlung oder Versand nur noch über den DHL-Tracking-Link.",
+   "source_url": "https://bloomwell.de/faq/lieferanschrift",
+   "retrieved": "2026-11-14"
+  },
+  {
+   "id": "faq_19",
+   "category": "bestellung_lieferung",
+   "question": "Wie storniere ich meine Bestellung?",
+   "answer": "Unbezahlte Bestellungen im Patientenportal selbst stornieren. Nach der Zahlung prüft das Serviceteam individuell, nur vor Verpackung oder Versand.",
+   "source_url": "https://bloomwell.de/faq/bestellung-stornieren",
+   "retrieved": "2026-11-14"
+  },
+  {
+   "id": "faq_20",
+   "category": "datenschutz_recht_beschwerde",
+   "question": "Kann ich meine Medikamente zurückschicken?",
+   "answer": "Grundsätzlich nein. Ausnahme bei offensichtlich mangelhafter Qualität: E-Mail mit Fotos an info@bloomwell.de. Bei Unverträglichkeit Rücksprache mit dem Arzt.",
+   "source_url": "https://bloomwell.de/faq/retoure",
+   "retrieved": "2026-11-14"
+  },
+  {
+   "id": "faq_21",
+   "category": "bestellung_lieferung",
+   "question": "Wie viel kostet der Versand?",
+   "answer": "In der Regel ab 250 € versandkostenfrei mit DHL Express, sonst 7,99 € (Standard) oder 11,49 € (Express). Maßgeblich ist der Preis im Checkout. Zustellung nur mit Ausweis, keine Packstation.",
+   "source_url": "https://bloomwell.de/faq/versandkosten",
+   "retrieved": "2026-11-14"
+  },
+  {
+   "id": "faq_22",
+   "category": "zahlung_rechnung",
+   "question": "Zahlung über die App funktioniert nicht?",
+   "answer": "Manche Banken lehnen Zahlungen ab; dann eine andere Methode wählen (Kreditkarte, Klarna, Apple Pay, Google Pay). Überweisungen brauchen bis zu 2 Werktage. Bei Abbuchung ohne Bestätigung Nachweis an info@bloomwell.de.",
+   "source_url": "https://bloomwell.de/faq/zahlung-funktioniert-nicht",
+   "retrieved": "2026-11-14"
+  },
+  {
+   "id": "faq_23",
+   "category": "zahlung_rechnung",
+   "question": "Klarna-Zahlung per Rechnung ausgewählt, wo ist die Rechnung?",
+   "answer": "In der Bloomwell-App und in der Klarna-App. An Klarna überweisen, nicht an die Apotheke, mit Klarna-Referenznummer.",
+   "source_url": "https://bloomwell.de/faq/zahlungsart-klarna",
+   "retrieved": "2026-11-14"
+  },
+  {
+   "id": "faq_24",
+   "category": "zahlung_rechnung",
+   "question": "Wo finde ich nach dem Arzt-Gespräch meine Rechnung?",
+   "answer": "Im Patientenportal unter Mein Profil → Therapieoptionen → Rechnung & Bezahlungen.",
+   "source_url": "https://bloomwell.de/faq/rechnung",
+   "retrieved": "2026-11-14"
+  },
+  {
+   "id": "faq_25",
+   "category": "it_app",
+   "question": "Ich habe keinen Code für den Login erhalten",
+   "answer": "Login per Einmalcode (15 Minuten gültig). App offen lassen, Postfach aktualisieren, Cache löschen, WLAN gegen mobile Daten tauschen oder Code per SMS anfordern.",
+   "source_url": "https://bloomwell.de/faq/ich-habe-keine-code-für-den-login-erhalten",
+   "retrieved": "2026-11-14"
+  },
+  {
+   "id": "faq_26",
+   "category": "it_app",
+   "question": "Ich kann meine Verifizierung nicht abschließen",
+   "answer": "Neueste App-Version installieren und Cache löschen. Hilft das nicht, Ausweis per E-Mail an info@bloomwell.de senden; die Verifizierung erfolgt dann manuell.",
+   "source_url": "https://bloomwell.de/faq/verifizierung-abschließen",
+   "retrieved": "2026-11-14"
+  },
+  {
+   "id": "faq_27",
+   "category": "rezept_termin_dokumente",
+   "question": "Wie kann ich meinen Termin stornieren oder umbuchen?",
+   "answer": "Über die drei Punkte an der Terminkachel. Bis 72 Stunden vorher kostenlos, danach können 30 € anfallen. Zum Umbuchen stornieren und neu buchen.",
+   "source_url": "https://bloomwell.de/faq/terminverwaltung",
+   "retrieved": "2026-11-14"
+  },
+  {
+   "id": "faq_28",
+   "category": "rezept_termin_dokumente",
+   "question": "Welche Unterlagen muss ich für die Therapie einreichen?",
+   "answer": "Keine Dokumente zwingend nötig; Krankheitsnachweise hochzuladen wird aber empfohlen (Stand der Seite: 17.09.2024).",
+   "source_url": "https://bloomwell.de/faq/unterlagen",
+   "retrieved": "2026-11-14"
+  },
+  {
+   "id": "faq_29",
+   "category": "bestellung_lieferung",
+   "question": "Kann ich die gewählte Apotheke ändern?",
+   "answer": "Unter Mein Profil → Ausgewählte Apotheke → Apotheke ändern. Nach Bestätigung der Apotheke für den Rezeptversand nicht mehr möglich.",
+   "source_url": "https://bloomwell.de/faq/kann-ich-die-gewählte-apotheke-ändern",
+   "retrieved": "2026-11-14"
+  },
+  {
+   "id": "faq_30",
+   "category": "medizinisch",
+   "question": "Wie kriege ich weitere Rezepte? Kann die Dosierung gesteigert werden?",
+   "answer": "Weitere Rezepte nach Folgetermin oder Folgeanfrage. Dosierungsänderungen nur durch den Arzt im Folgetermin; die Apotheke gibt nur das verschriebene Präparat ab.",
+   "source_url": "https://bloomwell.de/faq/dosierung",
+   "retrieved": "2026-11-14"
+  },
+  {
+   "id": "faq_31",
+   "category": "bestellung_lieferung",
+   "question": "Was bedeutet eine Präparatsanpassung?",
+   "answer": "Ist ein Präparat nicht verfügbar, wird die Verordnung auf ein vorrätiges angepasst, bei Marktplatz-Apotheken automatisch.",
+   "source_url": "https://bloomwell.de/faq/präparatsanpassung",
+   "retrieved": "2026-11-14"
+  }
+ ]
+}

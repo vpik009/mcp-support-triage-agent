@@ -1,0 +1,11 @@
+{
+ "_note": "Invented orders standing in for Bloomwell's internal order/shipping API. IDs match the synthetic tickets.",
+ "orders": {
+  "BW-2026-48213": {"status": "zurück an Apotheke", "detail": "Unzustellbar: Hausnummer nicht gefunden. Paket am 10.11. an die Apotheke zurückgegangen.", "paid": true, "carrier": "DHL Standard", "tracking": "00340434161077"},
+  "BW-2026-51177": {"status": "in Bearbeitung", "detail": "Bezahlt am 12.11., Apotheke bereitet den Versand vor.", "paid": true, "carrier": "DHL Express", "tracking": null},
+  "BW-2026-39905": {"status": "zugestellt", "detail": "Zugestellt am 11.11.", "paid": true, "carrier": "DHL Standard", "tracking": "00340434161012"},
+  "BW-2026-50002": {"status": "offen", "detail": "Noch nicht bezahlt.", "paid": false, "carrier": null, "tracking": null},
+  "BW-2026-47730": {"status": "unterwegs", "detail": "Seit 7 Tagen keine neue Sendungsbewegung.", "paid": true, "carrier": "DHL Standard", "tracking": "00340434161094"},
+  "BW-2026-49120": {"status": "unterwegs", "detail": "Seit 9 Tagen keine neue Sendungsbewegung.", "paid": true, "carrier": "DHL Express", "tracking": "JJD0001234567891"}
+ }
+}

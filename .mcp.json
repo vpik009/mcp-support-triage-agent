@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "bloomwell-support": {
+      "command": "uv",
+      "args": ["run", "python", "-m", "src.mcp_server"]
+    }
+  }
+}
