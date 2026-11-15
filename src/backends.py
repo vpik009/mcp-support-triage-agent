@@ -7,6 +7,7 @@ import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 
+SLACK_API = "https://slack.com/api/chat.postMessage"
 OUTBOX = Path(os.environ.get("OUTBOX_DIR", Path(__file__).resolve().parent.parent / "outbox"))
 
 
@@ -76,16 +77,19 @@ class SlackBackend(FileBackend):
 
     def __init__(self):
         super().__init__()
-        self.webhook = os.environ["SLACK_WEBHOOK_URL"]
+        self.token = os.environ["SLACK_BOT_TOKEN"]
 
     def post_message(self, channel, text):
-        body = {"text": "[" + channel + "] " + text}  # webhook only posts to its own channel so put the channel in the text
-        req = urllib.request.Request(self.webhook, data=json.dumps(body).encode(),
-                                     headers={"Content-Type": "application/json"}, method="POST")
+        body = {"channel": channel, "text": text}
+        req = urllib.request.Request(SLACK_API, data=json.dumps(body).encode(),
+                                     headers={"Authorization": "Bearer " + self.token,
+                                              "Content-Type": "application/json; charset=utf-8"}, method="POST")
         with urllib.request.urlopen(req, timeout=20) as resp:
-            answer = resp.read().decode()
-        # print("slack:", resp.status, answer)
-        return {"ok": answer == "ok", "channel": channel, "backend": "slack"}
+            answer = json.loads(resp.read())
+        # print("slack:", answer)
+        if not answer["ok"]:
+            raise RuntimeError("slack error: " + answer["error"])  # slack sends 200 even on errors, e.g. not_in_channel
+        return {"ok": True, "channel": channel, "backend": "slack"}
 
 
 def get_jira_backend():
@@ -95,6 +99,6 @@ def get_jira_backend():
 
 
 def get_slack_backend():
-    if os.environ.get("SLACK_WEBHOOK_URL"):
+    if os.environ.get("SLACK_BOT_TOKEN"):
         return SlackBackend()
     return FileBackend()

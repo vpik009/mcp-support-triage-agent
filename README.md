@@ -40,7 +40,80 @@ For each message the agent:
 
 Medical questions always go to a person. This is enforced in code as well as in the prompt.
 
-The model (Qwen3) runs locally with Ollama, so messages never leave the machine. The tools (FAQ search, order lookup, ticket, Slack) sit behind a small MCP server, so the same tools also work with Claude Code. Tickets and Slack messages are simulated and written to `outbox/`. The tickets already use Jira's field format. Optional modes send tickets to a real Jira site and messages to Slack through a webhook, but neither has been tested with the real services yet.
+The model (Qwen3) runs locally with Ollama, so messages never leave the machine. Since the tools sit behind an MCP server, they also work with Claude Code. By default, tickets and Slack messages are simulated and written to `outbox/`. With API keys, they go to a real Jira Cloud site (REST API v3) and to real Slack channels (`chat.postMessage`). Both connections have been tested end to end (see [Real Jira and Slack](#real-jira-and-slack)).
+
+## Examples
+
+Three real runs with qwen3:8b, in local mode (tickets and Slack messages go to the outbox).
+
+A question the FAQ answers:
+
+```
+user query: Wie lange dauert die Lieferung normalerweise?
+-> search_faq {"query": "Wie lange dauert die Lieferung normalerweise?"}
+    found faq_14 (0.888), faq_05 (0.866)
+
+category:    allgemein
+needs_human: False (none)
+faq:         faq_14
+ticket:      -
+slack:       -
+reply:       Die Lieferzeit beträgt in der Regel 1–2 Werktage Zustellung plus 1–2 Werktage Bearbeitung in der Apotheke. Bei Nachbestellung oder Präparatsanpassung können 2–4 Tage mehr benötigt werden. Weitere Informationen finden Sie hier: https://bloomwell.de/faq/lieferzeit
+```
+
+A medical question hidden in a thank-you message, handed to a person:
+
+```
+user query: Paket ist angekommen, danke! Kann ich die Blüten zusammen mit Ibuprofen nehmen?
+-> search_faq {"query": "Kann ich die Blüten zusammen mit Ibuprofen nehmen?"}
+    found faq_06 (0.824), faq_20 (0.819)
+-> create_jira_ticket {"category": "medizinisch", "description": "Der Patient fragt, ob er die Blüten zusammen mit Ibuprofen einnehmen kann.", "priority": "High", "summary": "Frage zur gleichzeitigen Einnahme von Blüten und Ibuprofen"}
+    SUP-101 created (file)
+
+category:    medizinisch
+needs_human: True (medical)
+faq:         -
+ticket:      SUP-101 Frage zur gleichzeitigen Einnahme von Blüten und Ibuprofen
+slack:       -
+reply:       Sie haben eine Frage zu der Kombination von Blüten und Ibuprofen. Da dies eine medizinische Frage ist, wird unser Team Sie umgehend kontaktieren, um weitere Informationen zu geben. Bitte warten Sie auf eine Rückmeldung.
+```
+
+A possible emergency, with the highest priority and a Slack notice to the medical team:
+
+```
+user query: Ich habe aus Versehen die doppelte Menge genommen, mir geht es richtig schlecht.
+-> create_jira_ticket {"category": "medizinisch", "description": "Der Patient hat aus Versehen die doppelte Menge genommen und berichtet, dass ihm schlecht wird. Es handelt sich um eine medizinische Frage, die eine sofortige Prüfung durch das medizinische Team erfordert.", "priority": "Highest", "summary": "Patient hat versehentlich doppelte Menge genommen und meldet sich wegen schlechten Zustands"}
+    SUP-101 created (file)
+-> notify_slack {"channel": "#medical-ops", "text": "Patient meldet sich wegen schlechten Zustands nach versehentlich genommener doppelte Menge. Ticket erstellt: medizinisch, Priorität: Highest."}
+    posted to #medical-ops (file)
+
+category:    medizinisch
+needs_human: True (medical)
+faq:         -
+ticket:      SUP-101 Patient hat versehentlich doppelte Menge genommen und meldet sich wegen schlechten Zustands
+slack:       #medical-ops Patient meldet sich wegen schlechten Zustands nach versehentlich genommener doppelte Menge. Ticket erstellt: medizinisch, Priorität: Highest.
+reply:       Sie haben aus Versehen die doppelte Menge genommen und berichten von schlechten Beschwerden. Bitte warten Sie auf Rückmeldung von unserem medizinischen Team. Sie erhalten eine Rückmeldung so bald wie möglich.
+```
+
+Not perfect yet: the first message should be in `bestellung_lieferung`, and the second run skipped the Slack notice to `#medical-ops` (`slack: -`) and promised a quick reply ("umgehend"), which the prompt forbids. In the third run, the reply to a possible emergency should also point to the emergency number (112), which the prompt doesn't cover yet. The evaluation below counts the wrong decisions, but it doesn't score the wording of the replies.
+
+## Real Jira and Slack
+
+This is the emergency example from above, run with real API keys. The agent created the ticket in Jira with priority Highest and the label `medizinisch`:
+
+<p align="center">
+  <img src="readme%20assets/jira%20ticket.png" alt="Jira board with ticket SUP-1" width="800"/>
+</p>
+
+<p align="center">
+  <img src="readme%20assets/jira%20ticket%20details.png" alt="Details of ticket SUP-1" width="800"/>
+</p>
+
+In the same run, the bot also posted a notice to `#medical-ops`, without any patient details:
+
+<p align="center">
+  <img src="readme%20assets/slack%20message.png" alt="Slack message from the Support Triage Bot in #medical-ops" width="800"/>
+</p>
 
 ## Run it
 
@@ -58,21 +131,23 @@ Then type a message, for example `Mein Paket BW-2026-49120 bewegt sich seit 9 Ta
 
 To use the tools in Claude Code, start `claude` in the repo folder and approve the `bloomwell-support` server from `.mcp.json`.
 
-For a real Jira test site, set `JIRA_URL`, `JIRA_EMAIL` and `JIRA_API_TOKEN` before starting. For Slack, set `SLACK_WEBHOOK_URL` to an incoming webhook. A webhook always posts to the same channel, so each message starts with the channel the agent picked.
+For a real Jira test site, set `JIRA_URL`, `JIRA_EMAIL` and `JIRA_API_TOKEN` before starting. For Slack, set `SLACK_BOT_TOKEN` to a bot token (`xoxb-...`) with the `chat:write` scope, and invite the bot to `#support`, `#medical-ops` and `#pharmacy-partners`. You can put these values in a `.env` file in the repo folder, and `src.agent` loads it on start. The evaluation doesn't load it, so it never creates real tickets or messages.
 
 ## Results
 
 `uv run python eval/run_eval.py dev` runs the agent on 30 labelled messages and checks its decisions, not the wording of its replies.
 
-| Metric | qwen3:8b (local) | qwen3:4b (local) | Claude Opus 5.5 (cloud) |
+| Metric | qwen3:8b | qwen3:4b | Claude Opus 5.5 |
 |---|---|---|---|
-| Category correct | 53 % | 60 % | TBA |
-| Human needed: decided correctly | 70 % | 70 % | TBA |
-| Ticket created exactly when needed | 70 % | 83 % | TBA |
-| Medical questions sent to a person | 4 / 4 | 4 / 4 | TBA |
-| Right FAQ entry used | 10 / 18 | 15 / 18 | TBA |
-| Answered without a person | 17 % | 30 % | TBA |
-| Time per message | 5.3 s | 39.3 s | TBA |
+| Category correct | 50 % | 60 % | - |
+| Human needed: decided correctly | 70 % | 70 % | - |
+| Ticket created exactly when needed | 70 % | 73 % | - |
+| Medical questions sent to a person | 4 / 4 | 4 / 4 | - |
+| Right FAQ entry used | 10 / 18 | 15 / 18 | - |
+| Answered without a person | 17 % | 30 % | - |
+| Time per message | 5.4 s | 40.4 s | - |
+
+Both qwen3 models run locally. I'll add the Claude Opus 5.5 comparison later, since a full run needs more API tokens than I have left at the moment. If the agent decides a person is needed but doesn't create a ticket, the code creates one (label `auto_ticket`), so no request it hands over gets lost.
 
 Aaaaaand the 4b model outperformed the 8b model...
 
@@ -82,10 +157,9 @@ Aaaaaand the 4b model outperformed the 8b model...
 
 My guess: the 4b model calls the tools more often (which would also explain why it is about 7 times slower), so it sees more FAQ entries and order details before it decides. With only 30 messages, part of the gap may also be luck.
 
-Every medical question reached a person with both models. The main error: in some cases the agent decided a person was needed but created no ticket. With 30 messages and one run per model, these numbers are a first impression. Details and planned fixes are in [eval/tests.md](eval/tests.md).
+Every medical question reached a person with both models. The remaining ticket errors are wrong decisions, not forgotten tickets: 8b sent a person 8 questions that didn't need one and missed 1 that did, and 4b had 6 unneeded tickets and missed 2. Of the 14 unneeded tickets, 5 come from treating a plain question as medical, which a narrower definition of "medical" should fix. With 30 messages and one run per model, these numbers are only a first impression. Details and planned fixes are in [eval/tests.md](eval/tests.md).
 
 ## Limitations
 
-- The fixes from the evaluation are not applied yet.
-- The Jira and Slack modes have not been tested with the real services.
+- Only one fix from the evaluation is applied so far (the automatic ticket). Category descriptions and a narrower definition of "medical" are still open.
 - There is no pseudonymisation of personal data, which a cloud model would need.

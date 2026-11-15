@@ -1,10 +1,11 @@
-# local agent: reads a support message, uses the mcp tools through qwen3 on ollama, returns a structured result
-# run: uv run python -m src.agent "Mein Paket BW-2026-49120 bewegt sich seit 9 Tagen nicht."
+# local support agent (qwen3 on ollama + mcp tools), run: uv run python -m src.agent
 import asyncio
 import json
 import sys
+from pathlib import Path
 
 import ollama
+from dotenv import load_dotenv
 from fastmcp import Client
 
 from src.mcp_server import mcp
@@ -57,11 +58,36 @@ def to_ollama_tools(mcp_tools):
     return tools
 
 
+def short_result(name, result):
+    # one readable line per tool result for the cli, the full result still goes to the model
+    if isinstance(result, dict) and "error" in result:
+        return "error: " + result["error"][:150]
+    if name == "search_faq":
+        hits = []
+        for f in result:
+            hits.append(f["id"] + " (" + str(f["score"]) + ")")
+        return "found " + ", ".join(hits)
+    if name == "get_order_status":
+        if not result["found"]:
+            return "order " + result["order_id"] + " not found"
+        return result["order_id"] + ": " + result["status"] + ", " + result.get("detail", "")
+    if name == "create_jira_ticket":
+        return result["key"] + " created (" + result["backend"] + ")"
+    if name == "notify_slack":
+        return "posted to " + result["channel"] + " (" + result["backend"] + ")"
+    return json.dumps(result, ensure_ascii=False)[:150]
+
+
 async def handle_message(text, verbose=False):
     trace = []
     async with Client(mcp) as client:
         tools = to_ollama_tools(await client.list_tools())
-        print("\n\ntools:", tools)
+        if verbose:
+            print("\ntools from the mcp server:")
+            for t in tools:
+                params = ", ".join(t["function"]["parameters"]["properties"])
+                print("  " + t["function"]["name"] + "(" + params + ")")
+            print()
         messages = [{"role": "system", "content": SYSTEM_PROMPT}, {"role": "user", "content": text}]
 
         for step in range(MAX_STEPS):
@@ -82,7 +108,7 @@ async def handle_message(text, verbose=False):
                 trace.append({"tool": name, "args": args, "result": result})
                 if verbose:
                     print("->", name, json.dumps(args, ensure_ascii=False))
-                    print("   ", json.dumps(result, ensure_ascii=False)[:300])
+                    print("   ", short_result(name, result))
                 messages.append({"role": "tool", "content": json.dumps(result, ensure_ascii=False), "tool_name": name})
 
         # second call w/o tools so the model has to answer in the fixed json format
@@ -92,19 +118,49 @@ async def handle_message(text, verbose=False):
         result = json.loads(final.message.content)
         # print(final.message.content)
 
-    # safety rule enforced in code too, the model alone is not trusted w/ this
-    if result["category"] == "medizinisch":
-        result["needs_human"] = True
-        result["reason"] = "medical"
+        # safety rule enforced in code too, the model alone is not trusted w/ this
+        if result["category"] == "medizinisch":
+            result["needs_human"] = True
+            result["reason"] = "medical"
+
+        # model sometimes decides a human is needed but never creates the ticket, so force it here
+        made_ticket = False
+        for call in trace:
+            if call["tool"] == "create_jira_ticket" and "key" in str(call["result"]):
+                made_ticket = True
+        if result["needs_human"] and not made_ticket:
+            priority = "Medium"
+            if result["category"] == "medizinisch":
+                priority = "High"
+            args = {"summary": "Supportanfrage (" + result["reason"] + "): " + text[:80],
+                    "description": text, "category": result["category"], "priority": priority,
+                    "labels": ["auto_ticket"]}  # label so we can tell these apart from the model's tickets
+            ticket = (await client.call_tool("create_jira_ticket", args)).data
+            trace.append({"tool": "create_jira_ticket", "args": args, "result": ticket})
+            if verbose:
+                print("-> create_jira_ticket (auto)", json.dumps(args, ensure_ascii=False))
+                print("   ", short_result("create_jira_ticket", ticket))
+
     result["tool_calls"] = trace
     return result
 
 
 if __name__ == "__main__":
+    # real jira/slack keys from .env, only here so the eval (imports handle_message) stays offline
+    load_dotenv(Path(__file__).resolve().parent.parent / ".env")
     message = input("user query: ") 
     out = asyncio.run(handle_message(message, verbose=True))
     print()
     print("category:   ", out["category"])
     print("needs_human:", out["needs_human"], "(" + out["reason"] + ")")
     print("faq:        ", ", ".join(out["faq_ids"]) or "-")
+    tickets = []
+    slack = []
+    for call in out["tool_calls"]:
+        if call["tool"] == "create_jira_ticket" and "key" in str(call["result"]):
+            tickets.append(call["result"]["key"] + " " + call["args"]["summary"])
+        if call["tool"] == "notify_slack" and "ok" in str(call["result"]):
+            slack.append(call["args"]["channel"] + " " + call["args"]["text"])
+    print("ticket:     ", " | ".join(tickets) or "-")
+    print("slack:      ", " | ".join(slack) or "-")
     print("reply:      ", out["reply"])
