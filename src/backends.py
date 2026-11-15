@@ -38,7 +38,7 @@ class FileBackend:
         return {"key": key, "status": "created", "backend": "file"}
 
     def post_message(self, channel, text):
-        self.append("slack.jsonl", {"channel": channel, "text": text, "ts": now()})
+        self.append("slack.jsonl", {"channel": channel, "text": text, "ts": now()})  # for now just write to a local file
         return {"ok": True, "channel": channel, "backend": "file"}
 
 
@@ -71,7 +71,30 @@ class JiraBackend(FileBackend):
         return {"key": key, "status": "created", "backend": "jira"}
 
 
-def get_backend():
-    if os.environ.get("BACKEND", "file") == "jira":
+class SlackBackend(FileBackend):
+    # real slack for messages, tickets still go to the outbox file
+
+    def __init__(self):
+        super().__init__()
+        self.webhook = os.environ["SLACK_WEBHOOK_URL"]
+
+    def post_message(self, channel, text):
+        body = {"text": "[" + channel + "] " + text}  # webhook only posts to its own channel so put the channel in the text
+        req = urllib.request.Request(self.webhook, data=json.dumps(body).encode(),
+                                     headers={"Content-Type": "application/json"}, method="POST")
+        with urllib.request.urlopen(req, timeout=20) as resp:
+            answer = resp.read().decode()
+        # print("slack:", resp.status, answer)
+        return {"ok": answer == "ok", "channel": channel, "backend": "slack"}
+
+
+def get_jira_backend():
+    if os.environ.get("JIRA_URL"):
         return JiraBackend()
+    return FileBackend()
+
+
+def get_slack_backend():
+    if os.environ.get("SLACK_WEBHOOK_URL"):
+        return SlackBackend()
     return FileBackend()

@@ -4,7 +4,7 @@ from pathlib import Path
 
 import numpy as np
 
-from src.backends import get_backend
+from src.backends import get_jira_backend, get_slack_backend
 
 DATA = Path(__file__).resolve().parent.parent / "data"
 
@@ -104,10 +104,10 @@ def create_jira_ticket(summary, description, category, priority="Medium", labels
         "labels": sorted(set(all_labels)),
     }
     # print("ticket:", fields)
-    return get_backend().create_ticket(fields)
+    return get_jira_backend().create_ticket(fields)
 
 
 def notify_slack(channel, text):
     if channel not in SLACK_CHANNELS:
         raise ValueError(f"unknown channel {channel!r}, expected one of {SLACK_CHANNELS}")
-    return get_backend().post_message(channel, text.strip())
+    return get_slack_backend().post_message(channel, text.strip())
